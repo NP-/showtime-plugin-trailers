@@ -333,7 +333,7 @@ plugin.addURI( PREFIX + "hdtrailers", function(page) {
 		if(url.indexOf('youtube.com')==-1){
 			page.appendItem(url.replace(/amp;amp;/gi,''),"video", metadata);
 		}else if(url.indexOf('clipconverter.cc')==-1 && service.youtube == "1"){
-			page.appendItem('youtube:video:simple:'+ metadata.title + ':' + getValue(url, 'v=', '&')
+			page.appendItem('youtube:video:simple:'+ escape(metadata.title) + ':' + getValue(url, 'v=', '&')
 			 ,"video", metadata);
 		} 
 		url = false;  
@@ -410,8 +410,7 @@ plugin.addURI( PREFIX + "hdtrailers:listsources:(.*)", function(page, category) 
 		if( url != '' && url.indexOf('youtube.com')==-1){
 			page.appendItem(url.replace(/amp;amp;/gi,''), "video", { title: title});
 		}else if( url != '' && url.indexOf('clipconverter.cc')==-1 && service.youtube == "1"){
-			showtime.trace('youtube: ' +url);
-			page.appendItem('youtube:video:simple:'+ title + ':' + getValue(url, 'v=', '&')
+			page.appendItem('youtube:video:simple:'+ escape(title) + ':' + getValue(url, 'v=', '&')
 			 ,"video", { title: title});
 		}
 		url = '';
